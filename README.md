@@ -6,31 +6,10 @@ refreshed.
 
 It saves values in the browsers `localStorage`.
 
-Upgrading from 0.2.x to 0.3.x
-=============================
-
-The default behaviour of `Session.set` has been changed. `default_method` now
-defaults to `temporary` (as was mentioned in the docs), rather than
-`persistent`, which was what it was set to in the code.
-
-This means that to keep the behaviour the same, you should set `default_method`
-to `persistent`:
-
-`config/settings.json` file:
-```json
-{
-  "public": {
-    "persistent_session": {
-      "default_method": "persistent"
-    }
-  }
-}
-```
-
 Installation
 ============
 ```
-meteor add itgenio:persistent-session
+meteor add vlasky:persistent-session
 ```
 **Note:** To use persistent-session, your project must have Session already installed. You can add Meteor's Session package by `meteor add session`.
 
@@ -70,7 +49,7 @@ Setting Session Values
 
 As of 3.3, you can use an object to set multiple values at once:
 
-```javasript
+```javascript
 Session.setPersistent({foo: "foo", bar: "bar"});
 ```
 
@@ -151,4 +130,12 @@ To define the default type for session variables, set `persistent_session.defaul
 
 In any other case the `default_method` will fall back to `temporary`
 
-Original from: https://github.com/okgrow/meteor-persistent-session
+Fork History
+============
+
+This is a fork of [StorytellerCZ's fork](https://github.com/StorytellerCZ/meteor-persistent-session/tree/patch-2) of 
+[`itgenio:persistent-session`](https://github.com/itgenio/meteor-persistent-session), which itself is a fork of 
+[`cultofcoders:persistent-session`](https://github.com/cult-of-coders/meteor-persistent-session), which itself is a fork of 
+[`u2622:persistent-session`](https://github.com/okgrow/meteor-persistent-session).
+
+Credit to StorytellerCZ for adding Meteor 3.0 support.

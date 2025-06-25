@@ -1,3 +1,10 @@
+### [0.4.13] - vlasky:persistent-session
+
+* Fork of [StorytellerCZ's fork](https://github.com/StorytellerCZ/meteor-persistent-session/tree/patch-2) with Meteor 3.0 support
+* Maintained fork for [`itgenio:persistent-session`](https://github.com/itgenio/meteor-persistent-session)
+* Full TypeScript support with strict type checking
+* Supports Meteor 1.8.2, 1.12, 2.3, and 3.0
+
 ### [0.4.8]
 
 * TypeScript

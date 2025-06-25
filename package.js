@@ -1,8 +1,8 @@
 Package.describe({
-  name: 'itgenio:persistent-session',
+  name: 'vlasky:persistent-session',
   version: '0.4.13',
-  summary: 'Persistently store Session data on the client',
-  git: 'https://github.com/itgenio/meteor-persistent-session',
+  summary: 'Persistently store Session data on the client. Supports Meteor 3.0.',
+  git: 'https://github.com/vlasky/meteor-persistent-session',
 });
 
 function configurePackages(api) {
