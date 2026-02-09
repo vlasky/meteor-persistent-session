@@ -166,8 +166,8 @@ export class PersistentSession {
       this.psaKeyList.push(key);
     }
 
-    amplify.store(PS_KEYS, this.psKeyList);
-    amplify.store(PSA_KEYS, this.psaKeyList);
+    amplify.store(PS_KEYS + this._dictName, this.psKeyList);
+    amplify.store(PSA_KEYS + this._dictName, this.psaKeyList);
     amplify.store(this._dictName + key, EJSON.toJSONValue(value));
   };
 
@@ -353,10 +353,11 @@ export class PersistentSession {
     // okay, if it was an array of keys, find the old key pairings for reactivity
     if (list) {
       if (Array.isArray(list)) {
-        keysToRemove = list.reduce((acc, key) => {
-          acc[key] = oldKeys[key];
-          return acc;
-        }, {} as Record<string, any>);
+        const nextKeysToRemove: Record<string, any> = {};
+        list.forEach(key => {
+          nextKeysToRemove[key] = oldKeys[key];
+        });
+        keysToRemove = nextKeysToRemove;
       } else {
         keysToRemove = list;
       }

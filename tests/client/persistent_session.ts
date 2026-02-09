@@ -1,8 +1,10 @@
 import { Random } from 'meteor/random';
 import { Session } from 'meteor/session';
+import { EJSON } from 'meteor/ejson';
 import { LifetimeType, PersistentSession } from '../../lib/persistent_session';
 import { amplify } from "../../lib/amplify";
 import { PS_KEYS } from "../../lib/constants";
+import { migrateToEJSON } from "../../lib/migrations";
 
 Tinytest.add("Modes - defaults to temporary", function (test) {
   const TestSession = new PersistentSession(Random.id());
@@ -332,4 +334,30 @@ Tinytest.add("Migrations - updates from 3.x to 4.x", function (test) {
   test.equal(TestSession.get('foo4'), []);
   test.equal(TestSession.get('bar4'), "noodol");
   test.equal(TestSession.get('obj4'), { obj: "val" });
+});
+
+Tinytest.add("Persistence - stores key list by dict namespace", function (test) {
+  localStorage.clear();
+  const dictName = Random.id();
+  const TestSession = new PersistentSession(dictName);
+
+  TestSession.setPersistent('foo', 'bar');
+
+  test.equal(amplify.store(PS_KEYS + dictName), ['foo']);
+  test.equal(amplify.store(PS_KEYS), undefined);
+});
+
+Tinytest.add("Migrations - migrateToEJSON uses dict namespace", function (test) {
+  localStorage.clear();
+  const dictName = Random.id();
+  const scopedKey = dictName + 'legacy';
+
+  amplify.store(PS_KEYS + dictName, ['legacy']);
+  amplify.store('__PSDATAVERSION__' + dictName, 0);
+  amplify.store(scopedKey, { legacy: true });
+
+  migrateToEJSON(dictName);
+
+  test.equal(amplify.store(scopedKey), EJSON.stringify({ legacy: true }));
+  test.equal(amplify.store('legacy'), undefined);
 });

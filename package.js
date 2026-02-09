@@ -1,6 +1,6 @@
 Package.describe({
   name: 'vlasky:persistent-session',
-  version: '0.4.13',
+  version: '0.4.14',
   summary: 'Persistently store Session data on the client. Supports Meteor 3.0.',
   git: 'https://github.com/vlasky/meteor-persistent-session',
 });

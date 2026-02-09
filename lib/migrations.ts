@@ -26,7 +26,7 @@ export function migrateToEJSON(dictName: string) {
   const psaKeyList = (amplify.get(PSA_KEYS + dictName) || []) as string[];
 
   [psKeyList, psaKeyList].forEach(list => list.forEach(key => {
-      amplify.store(key, EJSON.stringify(amplify.get(key)));
+      amplify.store(dictName + key, EJSON.stringify(amplify.get(dictName + key)));
     })
   );
 

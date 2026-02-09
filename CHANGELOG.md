@@ -1,3 +1,10 @@
+### [0.4.14] - 2026-02-09 - vlasky:persistent-session
+
+* Fix namespaced key-list storage for custom `PersistentSession` instances (`PS_KEYS` / `PSA_KEYS` now include `dictName`)
+* Fix `migrateToEJSON` to read/write namespaced keys (`dictName + key`) to avoid cross-dictionary migration writes
+* Improve TypeScript typing in `clear()` reducer for `keysToRemove`
+* Add regression tests covering namespaced persistence metadata and namespaced migration behavior
+
 ### [0.4.13] - vlasky:persistent-session
 
 * Fork of [StorytellerCZ's fork](https://github.com/StorytellerCZ/meteor-persistent-session/tree/patch-2) with Meteor 3.0 support

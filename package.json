@@ -26,6 +26,7 @@
   "homepage": "https://github.com/itgenio/meteor-persistent-session#readme",
   "devDependencies": {
     "@types/meteor": "^2.7.1",
+    "@zodern/mtest": "^0.5.1",
     "typescript": "~4.5.5"
   }
 }
